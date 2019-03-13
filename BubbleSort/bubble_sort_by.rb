@@ -9,6 +9,16 @@
   Use the block’s return value to sort your array.
 =end
 
+def bubble_sort_by(arr)
+  yield 
+end
+
+arr.each{
+  |x,y| x <=> y
+  return arr.sort
+}
+
+
 #testing
 bubble_sort_by(["hi","hello","hey"]) do |left,right|
   left.length - right.length
