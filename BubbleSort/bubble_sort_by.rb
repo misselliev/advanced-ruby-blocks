@@ -19,7 +19,7 @@ def bubble_sort_by(arr)
   puts arr
 end
 
-# testing
+# testing..
 bubble_sort_by(["hi","hello","hey"]) do |left, right|
   if !right.nil? && !left.nil?
     val = left.size - right.size
