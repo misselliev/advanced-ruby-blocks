@@ -114,7 +114,9 @@ module Enumerable
   chars.my_each_with_index { |item, index|
     puts "index -> #{index} -- item-> #{item}"
   }
+
   puts chars.my_select { |item| item.size == 1 } # %w[a, b, c]
+  puts numbers.my_select { |item| item % 2 != 0 } # [9, 3, 7]
   
   puts numbers.my_all? { |item| item.is_a? (Integer)} # true
   puts numbers.my_all? { |item| item.odd? } # false
@@ -129,10 +131,9 @@ module Enumerable
   puts chars.my_count { |item| item.size > 1 } # 4
   
   puts numbers.my_map(blq_num) # [10, 4, 3, 5, 8]
+  puts chars.my_map(blq_char) # [10, 4, 3, 5, 8]
   puts numbers.my_map { |item| item < 5 } # [3, 2, 4]
   
-
-  puts [1, 2, 1, 2].inject { |i| i + 2 if i.odd? }
-  puts numbers.my_inject { |i| i + 2 if i.odd? }
-  puts numbers.my_inject(10) { |i| i + 2 if i.odd? }
+  puts numbers.my_inject { |i| } # 25
+  puts numbers.my_inject(10) { |i| } # 35
 end
