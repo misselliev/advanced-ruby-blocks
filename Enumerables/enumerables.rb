@@ -110,33 +110,29 @@ module Enumerable
   blq_num = Proc.new { |i| i + 1 }
   blq_char = Proc.new { |i| i + 'k' }
 
-  # chars.my_each { |item| puts item }
-  # chars.my_each_with_index { |item, index|
-  #   puts "index -> #{index} -- item-> #{item}"
-  # }
-  # puts chars.my_select { |item| item.size == 1 } # %w[a, b, c]
+  chars.my_each { |item| puts item }
+  chars.my_each_with_index { |item, index|
+    puts "index -> #{index} -- item-> #{item}"
+  }
+  puts chars.my_select { |item| item.size == 1 } # %w[a, b, c]
   
-  # puts numbers.my_all? { |item| item.is_a? (Integer)} # true
-  # puts numbers.my_all? { |item| item.odd? } # false
+  puts numbers.my_all? { |item| item.is_a? (Integer)} # true
+  puts numbers.my_all? { |item| item.odd? } # false
 
-  # puts numbers.my_any? { |item| item.is_a? (String)} # false
-  # puts numbers.my_any? { |item| item % 2 == 0 } # true
+  puts numbers.my_any? { |item| item.is_a? (String)} # false
+  puts numbers.my_any? { |item| item % 2 == 0 } # true
 
-  # puts chars.my_none? { |item| item.is_a? (Integer)} # true
-  # puts chars.my_none? { |item| item == 'alpha' } # false
+  puts chars.my_none? { |item| item.is_a? (Integer)} # true
+  puts chars.my_none? { |item| item == 'alpha' } # false
 
-  # puts numbers.my_count { |item| item.even? } # 2
-  # puts chars.my_count { |item| item.size > 1 } # 4
+  puts numbers.my_count { |item| item.even? } # 2
+  puts chars.my_count { |item| item.size > 1 } # 4
   
-  # puts numbers.my_map(blq_num) # [10, 4, 3, 5, 8]
-  # puts numbers.my_map { |item| item < 5 } # [3, 2, 4]
+  puts numbers.my_map(blq_num) # [10, 4, 3, 5, 8]
+  puts numbers.my_map { |item| item < 5 } # [3, 2, 4]
   
 
   puts [1, 2, 1, 2].inject { |i| i + 2 if i.odd? }
   puts numbers.my_inject { |i| i + 2 if i.odd? }
   puts numbers.my_inject(10) { |i| i + 2 if i.odd? }
-  
-    
-  end
-  
-  
+end
