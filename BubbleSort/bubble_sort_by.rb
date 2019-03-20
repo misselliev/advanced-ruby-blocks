@@ -10,28 +10,19 @@
 =end
 
 def bubble_sort_by(arr)
-  lim = arr.size - 1
+  lim = arr.size - 2
 
   (0..lim).each { |j|
-    value = yield(arr[j], arr[j + 1])
-    arr[j], arr[j + 1] = arr[j + 1], arr[j] if value == 1
+    res = yield arr[j], arr[j + 1]
+    
+    unless arr[j].nil? && arr[j + 1].nil?
+      arr[j], arr[j + 1] = arr[j + 1], arr[j] if res > 0
+     end
   }
-  puts arr
+  arr
 end
 
 # testing..
-bubble_sort_by(["hi","hello","hey"]) do |left, right|
-  if !right.nil? && !left.nil?
-    val = left.size - right.size
-    out = nil
-    if val.zero?
-      out = 0
-    elsif val > 0
-      out = 1
-    elsif val < 0
-      out = -1
-    end
-  end
-  out
-end
+
+puts bubble_sort_by(['hi', 'hello', 'hey']){|left, right| left.length - right.length }
 # result= ["hi", "hey", "hello"]
