@@ -82,14 +82,16 @@ module Enumerable
     res = []
     if arg.empty?
       my_each do |i|
-        res << i if yield i
+        x = yield i
+        res << x
       end
     else
       my_each do |i|
-        res << arg[0].call(i)
+        x = arg[0].call(i)
+        res << x
       end
     end
-    res
+  res
   end
 
   #9
@@ -108,6 +110,7 @@ module Enumerable
   chars = %w[alpha beta theta omega a b c]
   numbers = [9, 3, 2, 4, 7]
   blq_num = Proc.new { |i| i + 1 }
+  blq_num2 = Proc.new { |i| i.odd? }
   blq_char = Proc.new { |i| i + 'k' }
 
   chars.my_each { |item| puts item }
@@ -131,8 +134,10 @@ module Enumerable
   puts chars.my_count { |item| item.size > 1 } # 4
   
   puts numbers.my_map(blq_num) # [10, 4, 3, 5, 8]
+  puts numbers.my_map(blq_num2) # [true, true, false, false, true]
   puts chars.my_map(blq_char) # [10, 4, 3, 5, 8]
-  puts numbers.my_map { |item| item < 5 } # [3, 2, 4]
+  puts numbers.my_map { |item| item.even? } # [false, false, true, true, false]
+  puts numbers.my_map { |item| item * 2 } # [18, 6, 4, 8, 14]
   
   puts numbers.my_inject { |i| } # 25
   puts numbers.my_inject(10) { |i| } # 35
