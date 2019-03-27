@@ -38,14 +38,3 @@ def bubble_sort(arr)
   end
   arr
 end
-end
-end
-
-# testing
-<<<<<<< HEAD
-puts bubble_sort([4, 3, 78, 2, 0, 2]) # [0,2,2,3,4,78]
-puts bubble_sort([3, 2]) # [2,3]
-=======
-bubble_sort([4, 3, 78, 2, 0, 2]) # [0,2,2,3,4,78]
-bubble_sort([3, 2]) # [2,3]
->>>>>>> ba2cd529699876f97b50bf508a71565b345fe1db

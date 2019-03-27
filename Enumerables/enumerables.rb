@@ -3,7 +3,7 @@ module Enumerable
   def my_each
     return to_enum unless block_given?
 
-    for i in self do
+    each do |i|
       yield i
     end
   end
@@ -25,9 +25,7 @@ module Enumerable
 
     sel = []
     my_each do |i|
-      if yield i
-        sel << i
-      end
+      sel << i if yield i
     end
     sel
   end
@@ -43,7 +41,7 @@ module Enumerable
     yes.size == size
   end
 
-  #5
+  # 5
   def my_any?
     return to_enum unless block_given?
 
@@ -54,7 +52,7 @@ module Enumerable
     !yes.empty?
   end
 
-  #6
+  # 6
   def my_none?
     return to_enum unless block_given?
 
@@ -65,9 +63,9 @@ module Enumerable
     yes.size.zero?
   end
 
-  #7
+  # 7
   def my_count
-    return to_enum unless block_given?
+    return size unless block_given?
 
     yes = []
     my_each do |i|
@@ -76,64 +74,39 @@ module Enumerable
     yes.size
   end
 
-  #8
+  # 8
   def my_map(*arg)
     # return to_enum unless block_given?
     res = []
     if arg.empty?
       my_each do |i|
-        res << i if yield i
+        x = yield i
+        res << x
       end
     else
       my_each do |i|
-        res << arg[0].call(i)
+        x = arg[0].call(i)
+        res << x
       end
     end
     res
   end
 
-  #9
-  def my_inject(total = 0)
-    return to_enum unless block_given?
-
-    my_each do |i|
-      yield i
-      total += i
+  # 9
+  def my_inject(item = nil)
+    if item.nil?
+      out = self[0]
+      idx = 1
+      while idx < length
+        out = (yield out, self[idx])
+        idx += 1
+      end
+      out
+    else
+      out = item
+      my_each { |a| out = (yield out, a) }
+      out
     end
-    total
+    out
   end
-
-  # testing
-
-  chars = %w[alpha beta theta omega a b c]
-  numbers = [9, 3, 2, 4, 7]
-  blq_num = Proc.new { |i| i + 1 }
-  blq_char = Proc.new { |i| i + 'k' }
-
-  chars.my_each { |item| puts item }
-  chars.my_each_with_index { |item, index|
-    puts "index -> #{index} -- item-> #{item}"
-  }
-
-  puts chars.my_select { |item| item.size == 1 } # %w[a, b, c]
-  puts numbers.my_select { |item| item % 2 != 0 } # [9, 3, 7]
-  
-  puts numbers.my_all? { |item| item.is_a? (Integer)} # true
-  puts numbers.my_all? { |item| item.odd? } # false
-
-  puts numbers.my_any? { |item| item.is_a? (String)} # false
-  puts numbers.my_any? { |item| item % 2 == 0 } # true
-
-  puts chars.my_none? { |item| item.is_a? (Integer)} # true
-  puts chars.my_none? { |item| item == 'alpha' } # false
-
-  puts numbers.my_count { |item| item.even? } # 2
-  puts chars.my_count { |item| item.size > 1 } # 4
-  
-  puts numbers.my_map(blq_num) # [10, 4, 3, 5, 8]
-  puts chars.my_map(blq_char) # [10, 4, 3, 5, 8]
-  puts numbers.my_map { |item| item < 5 } # [3, 2, 4]
-  
-  puts numbers.my_inject { |i| } # 25
-  puts numbers.my_inject(10) { |i| } # 35
 end
