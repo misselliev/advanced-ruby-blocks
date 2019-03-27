@@ -36,6 +36,7 @@ puts numbers.my_map { |item| item * 2 } # [18, 6, 4, 8, 14]
 
 puts numbers.my_inject { |i| } # 25
 puts numbers.my_inject(10) { |i| } # 35
+puts numbers.my_inject { |total, n| total * n }  # 25
 puts chars.my_inject { |memo, word|
   memo.length > word.length ? memo : word
 }
