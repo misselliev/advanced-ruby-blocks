@@ -93,22 +93,20 @@ module Enumerable
   end
 
   # 9
-  def my_inject(total = nil)
-    return to_enum unless block_given?
-    my_each do |item|
-      if total.nil?
-        total = '' if item.is_a? String
-        total = 0 if item.is_a? Integer
-        total = [] if item.is_a? Array
-        total = 0.0 if item.is_a? Float
+  def my_inject(item = nil)
+    if item.nil?
+      out = self[0]
+      idx = 1
+      while idx < length
+        out = (yield out, self[idx])
+        idx += 1
       end
-      yield total, item 
-      
-      total += item
+      out
+    else
+      out = item
+      my_each { |a| out = (yield out, a) }
+      out
     end
-    total
+    out
   end
 end
-
-a = [1, 2, 3].each{ |i| i + 1 }
-puts a

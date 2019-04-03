@@ -34,9 +34,10 @@ puts chars.my_map(blq_char) # [10, 4, 3, 5, 8]
 puts numbers.my_map { |item| item.even? } # [false, false, true, true, false]
 puts numbers.my_map { |item| item * 2 } # [18, 6, 4, 8, 14]
 
-puts numbers.my_inject { |i| } # 25
-puts numbers.my_inject(10) { |i| } # 35
-puts numbers.my_inject { |total, n| total * n }  # 25
-puts chars.my_inject { |memo, word|
-  memo.length > word.length ? memo : word
-}
+chars = %w[alphabet theta omega a b c]
+
+puts numbers.my_inject { |i,j| i+j } # 25
+puts numbers.my_inject(10) { |i,j| i*j } # 15120
+puts chars.my_inject { |memo, word| 
+  memo.length > word.length ? memo : word 
+} #alphabet
