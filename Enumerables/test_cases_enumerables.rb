@@ -34,8 +34,6 @@ puts chars.my_map(blq_char) # [10, 4, 3, 5, 8]
 puts numbers.my_map { |item| item.even? } # [false, false, true, true, false]
 puts numbers.my_map { |item| item * 2 } # [18, 6, 4, 8, 14]
 
-chars = %w[alphabet theta omega a b c]
-
 puts numbers.my_inject { |i,j| i+j } # 25
 puts numbers.my_inject(10) { |i,j| i*j } # 15120
 puts chars.my_inject { |memo, word| 
