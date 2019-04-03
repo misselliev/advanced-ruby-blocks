@@ -109,6 +109,3 @@ module Enumerable
     total
   end
 end
-
-a = [1, 2, 3].each{ |i| i + 1 }
-puts a
