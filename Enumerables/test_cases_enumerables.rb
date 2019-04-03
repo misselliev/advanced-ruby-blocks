@@ -9,34 +9,33 @@ blq_char = proc { |i| i + 'k' }
 
 chars.my_each { |item| puts item }
 chars.my_each_with_index do |item, index|
-puts "index -> #{index} -- item-> #{item}"
+  puts "index -> #{index} -- item-> #{item}"
 end
 puts chars.my_select { |item| item.size == 1 } # %w[a, b, c]
-puts numbers.my_select { |item| item % 2 != 0 } # [9, 3, 7]
+puts numbers.my_select(&:odd?) # [9, 3, 7]
 
-puts numbers.my_all? { |item| item.is_a? (Integer)} # true
-puts numbers.my_all? { |item| item.odd? } # false
+puts numbers.my_all? { |item| item.is_a? Integer } # true
+puts numbers.my_all?(&:odd?) # false
 
-puts numbers.my_any? { |item| item.is_a? (String)} # false
-puts numbers.my_any? { |item| item % 2 == 0 } # true
+puts numbers.my_any? { |item| item.is_a? String } # false
+puts numbers.my_any?(&:even?) # true
 
-puts chars.my_none? { |item| item.is_a? (Integer)} # true
+puts chars.my_none? { |item| item.is_a? Integer } # true
 puts chars.my_none? { |item| item == 'alpha' } # false
 
-puts numbers.my_count { |item| item.even? } # 2 -- [9, 3, 7]
+puts numbers.my_count(&:even?) # 2 -- [9, 3, 7]
 puts chars.my_count { |word| word.size > 1 } # 4 -- (alpha, beta, theta, omega)
 puts chars.my_count { |word| word.size == 5 } # 3 -- ∞w[ alpha, theta, omega ]
-
 
 puts numbers.my_map(blq_num) # [10, 4, 3, 5, 8]
 puts numbers.my_map(blq_num2) # [true, true, false, false, true]
 puts chars.my_map(blq_char) # [10, 4, 3, 5, 8]
-puts numbers.my_map { |item| item.even? } # [false, false, true, true, false]
+puts numbers.my_map(&:even?) # [false, false, true, true, false]
 puts numbers.my_map { |item| item * 2 } # [18, 6, 4, 8, 14]
 
 puts numbers.my_inject { |i| } # 25
 puts numbers.my_inject(10) { |i| } # 35
-puts numbers.my_inject { |total, n| total * n }  # 25
+puts numbers.my_inject { |total, n| total * n } # 25
 puts chars.my_inject { |memo, word|
   memo.length > word.length ? memo : word
 }
